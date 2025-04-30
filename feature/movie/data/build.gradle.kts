@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -34,10 +36,17 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:movie:domain"))
+    implementation(project(":core:network"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //    Dagger Hilt
+    implementation(DaggerHilt.hilt)
+    kapt(DaggerHilt.hiltCompiler)
 }
